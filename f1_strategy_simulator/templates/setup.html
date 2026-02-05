@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Mission Control // <span class="f1-red-text">Setup</span></h2>
+
+<div class="control-panel" style="grid-template-columns: 1fr 2fr;">
+    <!-- Left: Inputs -->
+    <div class="panel-card">
+        <h3>Race Parameters</h3>
+        <form id="simulationForm">
+            <div class="form-group">
+                <label class="form-label">Driver</label>
+                <select id="driver" class="form-select">
+                    {% for driver in drivers %}
+                    <option value="{{ driver }}">{{ driver }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Track</label>
+                <select id="track" class="form-select">
+                    {% for track in tracks %}
+                    <option value="{{ track }}">{{ track }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Tyre Compound</label>
+                <select id="compound" class="form-select">
+                    {% for tyre in tyres %}
+                    <option value="{{ tyre }}">{{ tyre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Weather</label>
+                <select id="weather" class="form-select">
+                    {% for w in weather %}
+                    <option value="{{ w }}">{{ w }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Laps: <span id="lapCount">50</span></label>
+                <input type="range" id="laps" class="form-range" min="10" max="70" value="50"
+                    oninput="document.getElementById('lapCount').innerText = this.value">
+            </div>
+
+            <button type="submit" class="f1-btn" style="width: 100%;">SIMULATE RACE</button>
+            <div id="loader" class="loader"></div>
+        </form>
+    </div>
+
+    <!-- Right: Results (Initially Hidden) -->
+    <div id="resultsPanel" style="display: none; width: 100%;">
+        <div class="panel-card" style="border-top-color: var(--neon-cyan);">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h3>SIMULATION RESULTS</h3>
+                <span class="f1-red-text"
+                    style="font-weight: bold; border: 1px solid var(--f1-red); padding: 4px 8px; border-radius: 4px;">RACE
+                    COMPLETED</span>
+            </div>
+
+            <div class="results-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="finalPos">--</div>
+                    <div class="stat-label">Est. Finish Position</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="avgLap">--</div>
+                    <div class="stat-label">Avg Lap Time (s)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalTime" style="font-size: 1.5rem;">--</div>
+                    <div class="stat-label">Total Race Time (s)</div>
+                </div>
+            </div>
+
+            <div
+                style="margin-top: 1.5rem; background: #111; padding: 1rem; border-radius: 4px; border-left: 4px solid var(--neon-green);">
+                <span style="color: #888; font-size: 0.8rem; text-transform: uppercase;">Optimal Strategy</span>
+                <div id="strategyText" style="font-size: 1.2rem; font-weight: bold;">--</div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="raceChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

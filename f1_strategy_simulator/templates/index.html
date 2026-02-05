@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero-card">
+    <h1 class="hero-title">RACE STRATEGY <span class="f1-red-text">SIMULATOR</span></h1>
+    <p style="font-size: 1.2rem; color: #ccc; max-width: 600px; margin: 0 auto 2rem auto;">
+        Experience the thrill of Formula 1 strategy. Select your driver, analyze track conditions, and simulate race
+        outcomes with our advanced telemetry engine.
+    </p>
+    <a href="/setup" class="f1-btn">ENTER PADDOCK</a>
+</div>
+
+<div class="control-panel">
+    <div class="panel-card">
+        <h3>REAL-TIME TELEMETRY</h3>
+        <p style="font-size: 0.9rem; color: #888;">Mock data generation for lap times, tyre degradation, and pit stop
+            windows.</p>
+    </div>
+    <div class="panel-card">
+        <h3>STRATEGY ENGINE</h3>
+        <p style="font-size: 0.9rem; color: #888;">Calculate optimal pit stop laps based on compound selection and track
+            conditions.</p>
+    </div>
+    <div class="panel-card">
+        <h3>TRACK ANALYTICS</h3>
+        <p style="font-size: 0.9rem; color: #888;">Visualize performance degradation curves across different circuits.
+        </p>
+    </div>
+</div>
+{% endblock %}
